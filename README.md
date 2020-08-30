@@ -15,5 +15,10 @@ Ever wondered on how we can add AI when it comes to location based services? In 
 
 ## Steps
 
+### Step 1: Python code for Visual Recognition
+
+install Watson Developer Cloud library -
+- pip install --upgrade "ibm-watson>=4.0.1"
+
 
  
