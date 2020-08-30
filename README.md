@@ -13,4 +13,7 @@ Ever wondered on how we can add AI when it comes to location based services? In 
 1. As we are using the visual recognition service there is a out of the box food model which we are going to use and it detects the name of the food which we have passed
 1. The name of the food is then passed to the Here Maps Discover API which then suggests places around a particular location which we have configured within the python application.
 
+## Steps
+
+
  
