@@ -170,7 +170,7 @@ Button click logic
         } 
 ```
 
-Pizza places a clickable icon on the map
+Pizza places as a clickable icon on the map
 
 ```javascript
 function displayRestaurants(response){ 
