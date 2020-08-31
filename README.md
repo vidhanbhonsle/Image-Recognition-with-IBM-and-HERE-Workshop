@@ -146,3 +146,62 @@ Create a folder 'templates' and create a file 'map.html' inside it.
 </html>
 ```
 Substitute the 'YOUR_IMAGE' with the image you want to use.
+
+### Step 4: Show pizza serving places on Map
+
+Show pizza places around you on a map with a click of a button
+
+An instance of Geocoding and Search Service
+
+'''html
+var service = platform.getSearchService();
+'''
+
+Button click logic
+
+'''html
+    function showRestaurants(){ 
+            let param = { 
+                at : myPosition.lat+','+myPosition.lng, 
+                q: query, 
+                limit:10 
+            };  
+            service.browse(param,displayRestaurants,alert); 
+        } 
+'''
+
+Pizza places a clickable icon on the map
+
+'''html
+function displayRestaurants(response){ 
+            var restaurantIcon = new H.map.Icon('/static/PIZZA_IMAGE'); 
+
+            // A group that can hold map objects: 
+            var restGroup = new H.map.Group(); 
+
+            for(let i = 0; i<response.items.length; i++){ 
+                let restPosition = response.items[i].position; 
+                let address = response.items[i].address.label; 
+                 
+                let restMarker = new H.map.Marker(restPosition,{icon: restaurantIcon} ); 
+                 
+                restMarker.setData("<p>" + address + "</p>"); 
+                 
+                restMarker.addEventListener('tap', function(evt){ 
+                    var bubble =  new H.ui.InfoBubble(evt.target.getGeometry(), { 
+
+                    // read custom data 
+                    content: evt.target.getData() 
+                }); 
+
+                ui.addBubble(bubble); 
+                }, false); 
+
+                // Add the marker to the group (which causes it to be displayed on the map) 
+                restGroup.addObject(restMarker); 
+                } 
+
+            // Add the group to the map object 
+            map.addObject(restGroup); 
+    }
+'''
