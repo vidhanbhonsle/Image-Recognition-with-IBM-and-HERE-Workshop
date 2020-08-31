@@ -78,7 +78,7 @@ if __name__ == '__main__':
 	app.run(debug = True)
 ```
 
-### Step 3: Show your location on a map
+### Step 3: Show Pizza serving places near you on a map
 
 - Create a folder 'templates' and create a file 'map.html' inside it.
 - Create a folder static and put images to show as icon in there.
