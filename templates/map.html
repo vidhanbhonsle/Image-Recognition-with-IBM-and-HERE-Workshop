@@ -1,0 +1,105 @@
+<html>  
+<head>
+<meta name="viewport" charset="UTF-8" content="initial-scale=1.0, width=device-width" />
+<script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+<script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+<script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+<script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+<link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css"/>
+</head>
+  
+<body style='margin: 0'>
+        <div id="mapContainer" style="width: 90vw; height: 80vh; display: block; margin: 0 auto; border: solid 2px black; margin-top: 10px;" > </div>
+        <div style="width: 100vw; height: 40px; margin-top: 30px;">
+            <input type="button" onclick="showRestaurants()" value = "Show Restaurants" style="width: 200px; height: 30px; border: 2px solid black; display: block; margin: 0 auto; margin-top: 20px;">
+        </div>
+    </body>
+
+<script>	
+
+	const lat = {{latitude}};
+	const lng = {{longitude}};
+	var query = "{{output_query}}";
+	
+	//console.log('query: ',query);
+	//console.log('latitude: ',lat);
+	//console.log('Longitude: ',lng);
+	
+	//Initialise communication with backend services
+	 var platform = new H.service.Platform({
+            apikey: "JS_HERE_API"   
+        });
+
+	// Obtain the default map types from the platform object:
+	var defaultLayers = platform.createDefaultLayers();
+
+	// Get your current position from wego.here.com
+	var myPosition = {lat: lat, lng: lng};
+
+	// Instantiate (and display) a map object:
+	var map = new H.Map(
+		document.getElementById('mapContainer'),
+		defaultLayers.vector.normal.map,
+		{
+			zoom: 15,
+			center: myPosition
+		});
+
+	//zoom and view controls
+	var ui = H.ui.UI.createDefault(map, defaultLayers, 'en-US');
+
+	//Move around the map
+	var mapEvents = new H.mapevents.MapEvents(map);
+	var behavior = new H.mapevents.Behavior(mapEvents);
+
+	// Get an instance of the geocoding and search service:
+	var service = platform.getSearchService();
+	
+	// create an icon for the marker. Choose any image you want.
+	var homeIcon = new H.map.Icon('/static/home.png'); 
+		
+	// Create a marker using the previously instantiated icon:
+	var posMarker = new H.map.Marker(myPosition,{icon:homeIcon});
+			
+	// Add the marker to the map 
+	map.addObject(posMarker);
+	
+	function showRestaurants(){
+			let param = {
+				at : myPosition.lat+','+myPosition.lng,
+				q: query,
+				limit:10
+			}; 
+			service.browse(param,displayRestaurants,alert);
+		}
+
+	function displayRestaurants(response){
+			var restaurantIcon = new H.map.Icon('/static/pizzaIcon.png');
+
+			// A group that can hold map objects:
+			var restGroup = new H.map.Group();
+
+			for(let i = 0; i<response.items.length; i++){
+				let restPosition = response.items[i].position;
+				let address = response.items[i].address.label;
+				
+				let restMarker = new H.map.Marker(restPosition,{icon: restaurantIcon} );
+				
+				restMarker.setData("<p>" + address + "</p>");
+				
+				restMarker.addEventListener('tap', function(evt){
+					var bubble =  new H.ui.InfoBubble(evt.target.getGeometry(), {
+      				// read custom data
+      				content: evt.target.getData()
+				});
+				ui.addBubble(bubble);
+				}, false);
+				// Add the marker to the group (which causes it to be displayed on the map)
+				restGroup.addObject(restMarker);
+				}
+
+			// Add the group to the map object
+			map.addObject(restGroup);
+	}		
+</script>
+</html>
