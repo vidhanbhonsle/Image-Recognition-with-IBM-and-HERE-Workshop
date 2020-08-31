@@ -2,9 +2,6 @@
 
 Ever wondered on how we can add AI when it comes to location based services? In this code we upload pass an image to a Python Flask Application and get recommendation based on the food picture you have passed.
 
-#### Sign up for IBM Cloud at https://ibm.biz/HERETechnologies
-#### Get your Here Maps API Key at https://developer.here.com
-
 ## Architecture
 
 ![Arch](/images/AI_Location_Sol_Arch.png)
@@ -17,8 +14,8 @@ Ever wondered on how we can add AI when it comes to location based services? In 
 
 - Code IDE
 - Python 3.X (https://www.python.org/downloads/)
-- HERE Developer Account (https://developer.here.com/sign-up?create=Freemium-Basic&keepState=true&step=account)
-- IBM Cloud account (https://cloud.ibm.com/login)
+- HERE Developer Account (https://developer.here.com/events/NIPP)
+- IBM Cloud account (https://cloud.ibm.com)
 - Bring your Coffee/Tea and enjoy the journey 
 
 ## Steps
