@@ -53,6 +53,9 @@ The above code will print "Pizza"
 
 ### Step 2: Integrating Flask in Python code
 
+install Flask library -
+- pip install flask
+
 ```python
 
 from flask import Flask,render_template  
@@ -75,3 +78,71 @@ def map_func():
 if __name__ == '__main__': 
     app.run(debug = True)
 ```
+
+### Step 3: Show your location on a map
+
+Create a folder 'templates' and create a file 'map.html' inside it.
+
+```html
+<html>   
+<head>   
+<meta name="viewport" charset="UTF-8" content="initial-scale=1.0, width=device-width" />
+<script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script> 
+<script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script> 
+<script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script> 
+<script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script> 
+<link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css"/> 
+</head> 
+
+<body style='margin: 0'> 
+<div id="mapContainer" style="width: 90vw; height: 80vh; display: block; margin: 0 auto; border: solid 2px black; margin-top: 10px;" >
+</div> 
+ <div style="width: 100vw; height: 40px; margin-top: 30px;"> 
+ <input type="button" onclick="showRestaurants()" value = "Show Restaurants" style="width: 200px; height: 30px; border: 2px solid black; display: block; margin: 0 auto; margin-top: 20px;"> 
+ </div>
+</body> 
+
+<script>    
+    const lat = {{latitude}}; 
+    const lng = {{longitude}}; 
+    var query = "{{output_query}}"; 
+
+    //Initialise communication with backend services 
+     var platform = new H.service.Platform({ 
+            apikey: "JS_API_KEY"    
+        }); 
+
+    // Obtain the default map types from the platform object: 
+    var defaultLayers = platform.createDefaultLayers(); 
+
+    // Get your current position from wego.here.com 
+    var myPosition = {lat: lat, lng: lng}; 
+
+    // Instantiate (and display) a map object: 
+    var map = new H.Map( 
+        document.getElementById('mapContainer'), 
+        defaultLayers.vector.normal.map, 
+        { 
+            zoom: 15, 
+            center: myPosition 
+        }); 
+
+    //zoom and view controls 
+    var ui = H.ui.UI.createDefault(map, defaultLayers, 'en-US'); 
+
+    //Move around the map 
+    var mapEvents = new H.mapevents.MapEvents(map); 
+    var behavior = new H.mapevents.Behavior(mapEvents); 
+
+    // create an icon for the marker. Choose any image you want. 
+    var homeIcon = new H.map.Icon('/static/YOUR_IMAGE');  
+
+    // Create a marker using the previously instantiated icon: 
+    var posMarker = new H.map.Marker(myPosition,{icon:homeIcon}); 
+
+    // Add the marker to the map  
+    map.addObject(posMarker);    
+</script>
+</html>
+```
+Substitute the 'YOUR_IMAGE' with the image you want to use.
