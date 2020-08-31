@@ -153,13 +153,13 @@ Show pizza places around you on a map with a click of a button
 
 An instance of Geocoding and Search Service
 
-'''html
+```html
 var service = platform.getSearchService();
-'''
+```
 
 Button click logic
 
-'''html
+```html
     function showRestaurants(){ 
             let param = { 
                 at : myPosition.lat+','+myPosition.lng, 
@@ -168,11 +168,11 @@ Button click logic
             };  
             service.browse(param,displayRestaurants,alert); 
         } 
-'''
+```
 
 Pizza places a clickable icon on the map
 
-'''javascript
+```javascript
 function displayRestaurants(response){ 
             var restaurantIcon = new H.map.Icon('/static/PIZZA_IMAGE'); 
 
@@ -204,4 +204,4 @@ function displayRestaurants(response){
             // Add the group to the map object 
             map.addObject(restGroup); 
     }
-'''
+```
