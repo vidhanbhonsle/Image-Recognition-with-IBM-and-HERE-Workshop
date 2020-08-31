@@ -13,6 +13,14 @@ Ever wondered on how we can add AI when it comes to location based services? In 
 1. As we are using the visual recognition service there is a out of the box food model which we are going to use and it detects the name of the food which we have passed
 1. The name of the food is then passed to the Here Maps Discover API which then suggests places around a particular location which we have configured within the python application.
 
+## Architecture
+
+- Code IDE
+- Python 3.X (https://www.python.org/downloads/)
+- HERE Developer Account (https://developer.here.com/sign-up?create=Freemium-Basic&keepState=true&step=account)
+- IBM Cloud account (https://cloud.ibm.com/login)
+- Bring your Coffee/Tea and enjoy the journey 
+
 ## Steps
 
 ### Step 1: Python code for Visual Recognition
