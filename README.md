@@ -58,26 +58,24 @@ install Flask library -
 - pip install flask
 
 ```python
+# Passing 'pizza' to the HERE APIs using Python Flask
+from flask import Flask,render_template
 
-from flask import Flask,render_template  
+latitude = 12.959111
+longitude = 77.732022
 
-#Somewhere in Bangalore, India 
-latitude = 12.959111 
-longitude = 77.732022 
+app = Flask(__name__)
+@app.route('/')
 
-app = Flask(__name__) 
+def map_func():
+	return render_template('map.html',
+                            latitude = latitude,
+                            longitude = longitude,
+                            output_query=output_query
+                            )
 
-@app.route('/') 
-
-def map_func(): 
-    return render_template('map.html', 
-                            latitude = latitude, 
-                            longitude = longitude, 
-                            output_query=output_query 
-                            ) 
-
-if __name__ == '__main__': 
-    app.run(debug = True)
+if __name__ == '__main__':
+	app.run(debug = True)
 ```
 
 ### Step 3: Show your location on a map
