@@ -153,13 +153,13 @@ Show pizza places around you on a map with a click of a button
 
 An instance of Geocoding and Search Service
 
-```html
+```javascript
 var service = platform.getSearchService();
 ```
 
 Button click logic
 
-```html
+```javascript
     function showRestaurants(){ 
             let param = { 
                 at : myPosition.lat+','+myPosition.lng, 
