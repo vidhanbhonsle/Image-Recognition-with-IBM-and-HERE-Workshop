@@ -41,4 +41,29 @@ with open('./test.jpg', 'rb') as image: 
 output_query = classes['images'][0]['classifiers'][0]['classes'][1]['class'] 
 print(output_query)  
 ```
+The above code will print "Pizza"
 
+### Step 2: Integrating Flask in Python code
+
+```python
+
+from flask import Flask,render_template  
+
+#Somewhere in Bangalore, India 
+latitude = 12.959111 
+longitude = 77.732022 
+
+app = Flask(__name__) 
+
+@app.route('/') 
+
+def map_func(): 
+    return render_template('map.html', 
+                            latitude = latitude, 
+                            longitude = longitude, 
+                            output_query=output_query 
+                            ) 
+
+if __name__ == '__main__': 
+    app.run(debug = True)
+```
