@@ -75,7 +75,7 @@ def map_func():
                             )
 
 if __name__ == '__main__':
-	app.run(debug = False)
+	app.run(debug = True)
 ```
 
 ### Step 3: Show your location on a map
