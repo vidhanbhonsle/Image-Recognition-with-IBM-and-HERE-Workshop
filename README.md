@@ -172,7 +172,7 @@ Button click logic
 
 Pizza places a clickable icon on the map
 
-'''html
+'''javascript
 function displayRestaurants(response){ 
             var restaurantIcon = new H.map.Icon('/static/PIZZA_IMAGE'); 
 
